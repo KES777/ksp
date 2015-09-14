@@ -7,12 +7,8 @@ function start( route, handlers ) {
 		var pathname =  url.parse(request.url).pathname;
 		console.log( "Request for " + pathname + " received." );
 
-		var content =  route( pathname, handlers );
-
-		response.writeHead(200, {"Content-Type": "text/plain"});
-		response.write( content );
-		response.end();
-		console.log( "Request for " +pathname + " processed." );
+		route( pathname, handlers, response );
+		console.log( "Request for " +pathname + " were routed." );
 	}
 
 	var server =  http.createServer( onRequest );
