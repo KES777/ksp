@@ -7,8 +7,20 @@ function start( route, handlers ) {
 		var pathname =  url.parse(request.url).pathname;
 		console.log( "Request for " + pathname + " received." );
 
-		route( pathname, handlers, response );
-		console.log( "Request for " +pathname + " were routed." );
+		var postData = "";
+		request.setEncoding("utf8");
+
+		request.addListener("data", function(postDataChunk) {
+			postData +=  postDataChunk;
+			console.log("Received POST data chunk '" +postDataChunk.length +"'.");
+		});
+
+		request.addListener("end", function() {
+			route( pathname, handlers, response, postData );
+			console.log( "Request for " +pathname + " were routed." );
+		});
+
+		console.log( "Request for " +pathname + " were preprocessed." );
 	}
 
 	var server =  http.createServer( onRequest );
