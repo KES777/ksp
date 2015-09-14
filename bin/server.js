@@ -12,7 +12,7 @@ function start( route, handlers ) {
 
 		request.addListener("data", function(postDataChunk) {
 			postData +=  postDataChunk;
-			console.log("Received POST data chunk '" +postDataChunk +"'.");
+			console.log("Received POST data chunk '" +postDataChunk.length +"'.");
 		});
 
 		request.addListener("end", function() {
