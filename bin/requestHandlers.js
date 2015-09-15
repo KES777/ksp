@@ -27,6 +27,7 @@ function start( response, postData ) {
 }
 
 
+
 function upload( response, postData ) {
 	console.log("Request handler 'upload' was called.");
 
@@ -38,5 +39,18 @@ function upload( response, postData ) {
 }
 
 
+
+function ajax( response, postData ) {
+	console.log("Request handler 'upload' was called.");
+
+	response.writeHead(200, {"Content-Type": "text/plain"});
+	response.write( "Hi, people!" );
+	response.end();
+
+	console.log( "Request for 'upload' were processed." );
+}
+
+
 exports.start  =  start;
 exports.upload =  upload;
+exports.ajax   =  ajax;
